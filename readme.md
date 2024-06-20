@@ -5,9 +5,17 @@
 > https://github.com/mdandretto/microservices-messaging-consumer
 >
 > The following GET requests will be accepted by this API:
-> a) Query a total value of an order (example http://localhost:8090/api/valortotalpedido/1001)
-> b) Query the number of orders of a client (example http://localhost:8090/api/pedidoporcliente/1)
-> c) Query a list of all orders of a client (example http://localhost:8090/api/listadepedidos/1)
+> a) Query a total value of an order
+> 
+> http://localhost:8090/api/valortotalpedido/1001
+>
+> b) Query the number of orders of a client
+>
+> http://localhost:8090/api/pedidoporcliente/1
+>
+> c) Query a list of all orders of a client
+>
+> http://localhost:8090/api/listadepedidos/1
 
 ## 💻 Pre-requisites
 
