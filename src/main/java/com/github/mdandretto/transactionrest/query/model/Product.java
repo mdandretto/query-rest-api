@@ -1,8 +1,6 @@
 package com.github.mdandretto.transactionrest.query.model;
 
-import java.io.Serializable;
-
-public class Item implements Serializable{
+public class Product{
     private String produto;
     private int quantidade;
     private float preco;

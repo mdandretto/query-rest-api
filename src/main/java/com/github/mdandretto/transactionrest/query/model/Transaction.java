@@ -26,9 +26,10 @@ public class Transaction {
 	@Column(name = "total_ammount")
 	private String totAmmount;
 
-	public Transaction() {
-
-	}
+    public Transaction()
+    {
+        
+    }
 
     public long getId() {
         return id;

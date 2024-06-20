@@ -29,10 +29,10 @@ public class ItemList {
     @Column(name = "quantidade")
 	private int quantidade;
 
+    public ItemList()
+    {
 
-    public ItemList() {
-
-	}
+    }
 
     public long getId() {
         return id;

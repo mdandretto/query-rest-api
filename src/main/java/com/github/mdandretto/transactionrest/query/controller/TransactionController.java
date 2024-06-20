@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.mdandretto.transactionrest.query.model.Item;
+import com.github.mdandretto.transactionrest.query.model.Product;
 import com.github.mdandretto.transactionrest.query.model.ItemList;
 import com.github.mdandretto.transactionrest.query.model.Transaction;
-import com.github.mdandretto.transactionrest.query.model.TransactionList;
+import com.github.mdandretto.transactionrest.query.model.Order;
 import com.github.mdandretto.transactionrest.query.repository.ItemListRepository;
 import com.github.mdandretto.transactionrest.query.repository.TransactionRepository;
 
@@ -59,40 +59,12 @@ public class TransactionController {
 
 	//c. Lista de pedidos realizados por cliente
 	@GetMapping("/listadepedidos/{codCliente}")
-	public ResponseEntity<List<TransactionList>> getPedidoByCodCliente(@PathVariable("codCliente") String codCliente) {
+	public ResponseEntity<List<Order>> getPedidoByCodCliente(@PathVariable("codCliente") String codCliente) {
 		List<Transaction> transactionData = transactionRepository.findByCodCliente(codCliente);
 
 		if (transactionData.size() > 0) {
-			List<String> lista = new ArrayList<String>();
-			
-			List<TransactionList> allTransactions = new ArrayList<TransactionList>();
-			for(int i = 0; i<transactionData.size(); i++)
-			{
-				TransactionList tr = new TransactionList();;
-				lista.add(transactionData.get(i).getCodPedido());
-				List<ItemList> itemList = null;
-				for(int j = 0; j<lista.size(); j++)
-				{
-					itemList = itemListRepository.findByCodPedido(lista.get(j));
-				}
-
-				Item[] itVector = new Item[itemList.size()];
-
-				for(int j = 0; j<itemList.size(); j++)
-				{
-					Item it = new Item();
-					it.setPreco(itemList.get(j).getPreco());
-					it.setProduto(itemList.get(j).getProduto());
-					it.setQuantidade(itemList.get(j).getQuantidade());
-					itVector[j] = it;
-				}
-				tr.setItem(itVector);
-				tr.setCodigoPedido(transactionData.get(i).getCodPedido());
-				tr.setCodigoCliente(codCliente);
-				allTransactions.add(i, tr);
-			}	
-
-			return new ResponseEntity<List<TransactionList>>(allTransactions, HttpStatus.OK);
+			List<Order> allTransactions = TransactionBusiness.getOrdersByClient(transactionData, itemListRepository, codCliente);
+			return new ResponseEntity<List<Order>>(allTransactions, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

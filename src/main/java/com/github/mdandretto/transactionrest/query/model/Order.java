@@ -1,9 +1,6 @@
 package com.github.mdandretto.transactionrest.query.model;
 
-import java.io.Serializable;
-
-
-public class TransactionList implements Serializable {
+public class Order {
     private String codigoPedido;
     private String codigoCliente;
     public String getCodigoPedido() {
@@ -18,11 +15,11 @@ public class TransactionList implements Serializable {
     public void setCodigoCliente(String codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
-    public Item[] getItem() {
+    public Product[] getItem() {
         return item;
     }
-    public void setItem(Item[] item) {
+    public void setItem(Product[] item) {
         this.item = item;
     }
-    private Item[] item;
+    private Product[] item;
 }
